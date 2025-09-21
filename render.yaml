@@ -6,32 +6,40 @@ services:
     image:
       url: n8nio/n8n:latest
 
-    # خليه ما يوجّه الترافيك إلا بعد ما يكون n8n جاهز
+    # خليه يعتبر الخدمة "جاهزة" بعد ما /rest/health ترجع 200
     healthCheckPath: /rest/health
 
     envVars:
-      # Render يمرر الترافيك إلى PORT، خلّي n8n يسمع على نفس المنفذ
+      # Render يمرّر الترافيك على هذا المنفذ
       - key: PORT
         value: 10000
-      - key: N8N_PORT
-        value: 10000
+      # خلّي n8n يقرأ نفس المنفذ من PORT (لا تذكر N8N_PORT حتى لا تتعارض القيم)
 
       - key: N8N_HOST
         value: n8n-z3ie.onrender.com
       - key: N8N_PROTOCOL
         value: https
 
-      # مهم وجودها للروابط الداخلية والويبهوكس
+      # مهم وجودها لروابط الواجهة والويبهوكس
       - key: N8N_EDITOR_BASE_URL
         value: https://n8n-z3ie.onrender.com/
       - key: N8N_WEBHOOK_URL
         value: https://n8n-z3ie.onrender.com/
 
+      # تأكد إن الواجهة غير معطّلة
+      - key: N8N_DISABLE_UI
+        value: "false"
+
+      # تحسينات موصى بها
       - key: GENERIC_TIMEZONE
         value: UTC
       - key: N8N_ENCRYPTION_KEY
         generateValue: true
+      - key: DB_SQLITE_POOL_SIZE
+        value: "2"
+      - key: N8N_RUNNERS_ENABLED
+        value: "true"
 
-      # خلال التشخيص خلّيها "false" لتجنّب حجب healthcheck
+      # عطّل الـ Basic Auth مؤقتًا أثناء التشخيص
       - key: N8N_BASIC_AUTH_ACTIVE
         value: "false"
