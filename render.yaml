@@ -6,15 +6,15 @@ services:
     plan: free
     envVars:
       - key: N8N_HOST
-        value: yourname.onrender.com
-      - key: N8N_PROTOCOL
-        value: https
+        value: n8n-z3ie.onrender.com
       - key: N8N_PORT
         value: 5678
+      - key: N8N_PROTOCOL
+        value: https
       - key: N8N_EDITOR_BASE_URL
-        value: https://yourname.onrender.com/
+        value: https://n8n-z3ie.onrender.com/
       - key: N8N_WEBHOOK_URL
-        value: https://yourname.onrender.com/
+        value: https://n8n-z3ie.onrender.com/
       - key: GENERIC_TIMEZONE
         value: UTC
       - key: N8N_ENCRYPTION_KEY
