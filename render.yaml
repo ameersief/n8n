@@ -8,7 +8,9 @@ services:
       - key: N8N_HOST
         value: n8n-z3ie.onrender.com
       - key: N8N_PORT
-        value: 5678
+        value: 10000
+      - key: PORT
+        value: 10000
       - key: N8N_PROTOCOL
         value: https
       - key: N8N_EDITOR_BASE_URL
