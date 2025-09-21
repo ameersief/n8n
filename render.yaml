@@ -5,26 +5,30 @@ services:
     plan: free
     image:
       url: n8nio/n8n:latest
+
+    # ينتظر حتى تكون الخدمة جاهزة
+    healthCheckPath: /rest/health
+
     envVars:
       - key: N8N_HOST
         value: n8n-z3ie.onrender.com
-      - key: N8N_PORT
-        value: 10000
-      - key: PORT
-        value: 10000
       - key: N8N_PROTOCOL
         value: https
-      - key: N8N_EDITOR_BASE_URL
-        value: https://n8n-z3ie.onrender.com/
+
+      # مهم: خلّي التطبيق يسمع على منفذ Render
+      - key: PORT
+        value: 10000
+      # اترك N8N_PORT غير مذكور (خليه ياخذ PORT تلقائياً)
+
+      # خفّف التعقيد: لا تضع EDITOR_BASE_URL مؤقتاً
       - key: N8N_WEBHOOK_URL
         value: https://n8n-z3ie.onrender.com/
+
       - key: GENERIC_TIMEZONE
         value: UTC
       - key: N8N_ENCRYPTION_KEY
         generateValue: true
+
+      # مؤقتاً عطّل Basic Auth لتسهيل التشخيص
       - key: N8N_BASIC_AUTH_ACTIVE
-        value: "true"
-      - key: N8N_BASIC_AUTH_USER
-        value: admin
-      - key: N8N_BASIC_AUTH_PASSWORD
-        generateValue: true
+        value: "false"
