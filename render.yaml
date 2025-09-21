@@ -6,14 +6,27 @@ services:
     image:
       url: n8nio/n8n:latest
 
-    # اعتبر الخدمة جاهزة فقط لما /rest/health ترجع 200
     healthCheckPath: /rest/health
 
     envVars:
-      # Render يمرّر الترافيك على هذا المنفذ؛ نخلي n8n يسمع عليه
+      # Render يرسل الترافيك للكونتينر على هذا المنفذ
       - key: PORT
         value: "10000"
 
-      # تأكد أن واجهة الويب غير معطّلة
+      # ثبّت مسار الواجهة على الجذر صراحة
+      - key: N8N_PATH
+        value: "/"
+
+      # لا تعطّل الواجهة بأي حال
       - key: N8N_DISABLE_UI
         value: "false"
+
+      # (اختياري لكن مفيد لاحقًا)
+      - key: DB_SQLITE_POOL_SIZE
+        value: "2"
+      - key: N8N_RUNNERS_ENABLED
+        value: "true"
+      - key: GENERIC_TIMEZONE
+        value: "UTC"
+      - key: N8N_ENCRYPTION_KEY
+        generateValue: true
