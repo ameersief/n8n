@@ -1,40 +1,27 @@
 services:
   - type: web
     name: n8n
-    env: docker
-    repo: https://github.com/ameersief/n8n
+    env: image
     plan: free
-
-    # خلّي Render ما يوجّه الترافيك إلا بعد ما النّظام يجهز
-    healthCheckPath: /rest/health
-
-    # (اختياري لكنه يساعد) تأكيد أمر التشغيل الافتراضي للصورة
-    dockerCommand: start
-
+    image:
+      url: n8nio/n8n:latest
     envVars:
       - key: N8N_HOST
         value: n8n-z3ie.onrender.com
-      - key: N8N_PROTOCOL
-        value: https
-
-      # مهم جداً: Render يستخدم PORT=10000 — خلّي n8n يسمع عليه
-      - key: PORT
-        value: 10000
       - key: N8N_PORT
         value: 10000
-
-      # روابط الأساس (مع سلاش أخير)
+      - key: PORT
+        value: 10000
+      - key: N8N_PROTOCOL
+        value: https
       - key: N8N_EDITOR_BASE_URL
         value: https://n8n-z3ie.onrender.com/
       - key: N8N_WEBHOOK_URL
         value: https://n8n-z3ie.onrender.com/
-
       - key: GENERIC_TIMEZONE
         value: UTC
       - key: N8N_ENCRYPTION_KEY
         generateValue: true
-
-      # تقدر تبقيها فعالة أو توقفها مؤقتاً أثناء التجارب
       - key: N8N_BASIC_AUTH_ACTIVE
         value: "true"
       - key: N8N_BASIC_AUTH_USER
