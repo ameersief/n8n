@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: n8n
+    env: docker
+    repo: https://github.com/ameersief/n8n
+    plan: starter
+    disk:
+      name: data
+      mountPath: /home/node/.n8n
+      sizeGB: 10
+    envVars:
+      - key: N8N_HOST
+        value: ameer.onrender.com
+      - key: N8N_PROTOCOL
+        value: https
+      - key: N8N_PORT
+        value: 5678
+      - key: N8N_EDITOR_BASE_URL
+        value: https://ameer.onrender.com/
+      - key: N8N_WEBHOOK_URL
+        value: https://ameer.onrender.com/
+      - key: GENERIC_TIMEZONE
+        value: UTC
+      - key: N8N_ENCRYPTION_KEY
+        generateValue: true
+      - key: N8N_BASIC_AUTH_ACTIVE
+        value: "true"
+      - key: N8N_BASIC_AUTH_USER
+        value: admin
+      - key: N8N_BASIC_AUTH_PASSWORD
+        generateValue: true
